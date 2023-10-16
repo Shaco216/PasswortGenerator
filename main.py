@@ -9,29 +9,37 @@ from Generator import *
 
 masterWindow= Tk()
 masterWindow.title = "Passwordgenerator"
+#region specialMethods
+def ShowNewComponents():
+    for newComp in newComponentes:
+        if newComp is type(Text):
+            newComp.insert(newPW.get())
+        newComp.pack()
 
+#endregion
 #region ViewProperties
 pwGen = Generator()
 complexity = StringVar()
 complexity.set(pwGen.passwordComplexibility[0])
 newPW = StringVar()
+newPW.set = ""
 
 #endregion
 
-elementsHeight = 2
+elementsHeight = 1
 
 allComponents = []
 newComponentes = []
 allComponents.append(Label(masterWindow,text="Bitte Passwortlänge eingeben:"))
-allComponents.append(Text(masterWindow, height=elementsHeight))
+allComponents.append(Text(masterWindow, height=elementsHeight, width=3))
 allComponents.append(Label(masterWindow,text="Bitte Komplexität wählen: "))
 allComponents.append(OptionMenu(masterWindow, complexity, *pwGen.passwordComplexibility))
 allComponents.append(Button(masterWindow, text="Create Password", command=lambda:
-[newPW.set(pwGen.GeneratePassword(complexity.get())), ShowNewComponents]))
+[pwGen.GeneratePassword(complexity,newPW), ShowNewComponents]))
 
 
 newComponentes.append(Label(masterWindow, text="Hier ist ihr neues Passwort"))
-newComponentes.append(Text(masterWindow))
+newComponentes.append(Text(masterWindow, height=elementsHeight))
 
 
 for component in allComponents:
@@ -41,10 +49,6 @@ mainloop()
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi, {name}')  # Press Strg+F8 to toggle the breakpoint.
-def ShowNewComponents():
-    for newComp in range(newComponentes):
-        if(newComp == 1):
-        newComp[newcom].pack
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':

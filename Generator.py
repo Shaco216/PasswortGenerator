@@ -13,11 +13,12 @@ class Generator:
         self.passwordLength = int(pwLength)
     def SetComplexibility(self, complexibility):
         self.passwordComplexibility = complexibility
-    def GeneratePassword(self, complexibility):
-        self.possibleCharacters = self.inputModel.GetCharacters(self.passwordComplexibility)
-        newPW = ""
+    def GeneratePassword(self, complexibility,newPW):
+        self.possibleCharacters = self.inputModel.GetCharacters(complexibility)
+        newPWstring = ""
         for pwLen in range(self.passwordLength):
-            newPW= newPW + self.possibleCharacters[random.randint(0,len(self.possibleCharacters)-1)]
+            newPWstring= newPWstring + self.possibleCharacters[random.randint(0,len(self.possibleCharacters)-1)]
+        newPW.set(newPWstring)
         return newPW
 
 
